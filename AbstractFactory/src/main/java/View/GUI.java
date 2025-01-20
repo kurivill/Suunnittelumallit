@@ -21,6 +21,7 @@ public class GUI extends Application {
     private Pane createdElement;
     private Text currentStyle = new Text();
     private String teksti = "This is an element";
+    String lastPressed = "";
 
     public void start(Stage window) {
         VBox root = new VBox(10);
@@ -51,25 +52,29 @@ public class GUI extends Application {
 
         createButton.setOnAction(e -> {
             createElement("button");
+            lastPressed = "button";
         });
         createTextField.setOnAction(e -> {
             createElement("textField");
+            lastPressed = "textField";
         });
         createCheckBox.setOnAction(e -> {
             createElement("checkBox");
+            lastPressed = "checkBox";
         });
 
         elementSelection.getChildren().addAll(createButton, createTextField, createCheckBox);
 
         Button changeText = new Button("Change text");
-
         changeText.setOnAction(e -> {
-            if (teksti.equals("This is an element")) {
-                teksti = "This is an alternate text";
-            } else {
+            if (teksti.equals("altered text")) {
                 teksti = "This is an element";
+            } else {
+            teksti = "altered text";
             }
+            createElement(lastPressed);
         });
+
 
         root.getChildren().addAll(styleSelection, elementSelection, changeText, createdElement);
 
