@@ -2,13 +2,26 @@ package View;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 
-public interface UIFactory {
+public abstract class UIFactory {
 
-    GraphicsContext createGraphicsContext(Canvas canvas);
-    Canvas createCanvas();
+    public GraphicsContext createGraphicsContext(Canvas canvas){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        return gc;
+    }
 
-    TextField createTextField(String text);
-    CheckBox createCheckBox(String text);
-    Button createButton(String text);
+    public Canvas createCanvas() {
+        Canvas canvas = new Canvas(500, 500);
+        return canvas;
+    }
+
+    abstract TextFieldAbstract createTextField(String text);
+    abstract CheckBoxAbstract createCheckBox(String text);
+    abstract ButtonAbstract createButton(String text);
 }
