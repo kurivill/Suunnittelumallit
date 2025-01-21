@@ -13,7 +13,7 @@ public class Department extends Unit{
     public void printData(StringBuilder sb, int level) {
 
         String indent = " ".repeat(level);
-        sb.append(indent).append(" > Department: ").append(this.name).append("\n");
+        sb.append(indent).append("<Department name=\"").append(this.name).append("\">\n");
         for (Unit unit : units) {
             unit.printData(sb, level + 1);
         }

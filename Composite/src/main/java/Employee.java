@@ -11,7 +11,8 @@ public class Employee extends Unit{
     public void printData(StringBuilder sb, int level) {
 
         String indent = " ".repeat(level);
-        sb.append(indent).append(" * Employee: ").append(this.name).append(" (").append(this.salary).append(")\n");
+        sb.append(indent).append("<Employee name=\"").append(this.name).append("\" salary=\"")
+                .append(salary).append("\" />\n");
 
 
     }
