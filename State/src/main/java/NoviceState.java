@@ -14,6 +14,7 @@ public class NoviceState extends State{
                 getHahmo().setExperiencePoints(20);
                 if (getHahmo().getExperiencePoints() >= getHahmo().getBreakPoints()[0]) {
                     getHahmo().setState(new IntermediateState(this.getHahmo()));
+                    getHahmo().setLevel();
                 }
                 break;
             default:

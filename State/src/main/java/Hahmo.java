@@ -31,6 +31,7 @@ public class Hahmo {
                 System.out.println("Winner winner chicken dinner");
                 return;
             }
+            System.out.println("\n" + name + " is a " + level + " with " + experiencePoints + " experience points and " + healthPoints + " health points.");
             state.action();
         }
     }

@@ -15,6 +15,7 @@ public class ExpertState extends State{
                 getHahmo().checkTrainingFail();
                 if (getHahmo().getExperiencePoints() >= getHahmo().getBreakPoints()[2]) {
                     getHahmo().setState(new MasterState(this.getHahmo()));
+                    getHahmo().setLevel();
                 }
                 break;
             case 2:

@@ -14,6 +14,7 @@ public class IntermediateState extends State {
                 getHahmo().checkTrainingFail();
                 if (getHahmo().getExperiencePoints() >= getHahmo().getBreakPoints()[1]) {
                     getHahmo().setState(new ExpertState(this.getHahmo()));
+                    getHahmo().setLevel();
                 }
                 break;
             case 2:
