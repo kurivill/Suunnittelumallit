@@ -16,6 +16,7 @@
         <module>Singleton</module>
         <module>Decorator</module>
         <module>State</module>
+        <module>Template</module>
     </modules>
 
     <properties>
