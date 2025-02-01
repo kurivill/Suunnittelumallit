@@ -5,7 +5,7 @@ public class Player {
 
     public Player() {
         this.handScore = 0;
-        this.score = 100;
+        this.score = 10;
     }
 
 
