@@ -8,6 +8,7 @@ public class Memento implements IMemento {
         this.options = options.clone(); // Copy options array
         this.isSelected = isSelected;
         System.out.println("Memento created");
+        // TÄhän pitää lisätä timestamp
     }
 
     public int[] getOptions() {
@@ -17,4 +18,6 @@ public class Memento implements IMemento {
     public boolean isSelected() {
         return isSelected;
     }
+
+    // Lisää metodi, joka tulostaa metadatan.
 }

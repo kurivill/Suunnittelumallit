@@ -12,6 +12,12 @@ import javafx.scene.input.KeyCode;
 
 public class Gui extends Application {
 
+    // Eli tähän luokkaan pitää lisätä nappi, jolla tehdään uusi stage
+    // Sen stagen sisään siis listview, joka populoidaan noiden arraylistien mukaan
+    // Eli uusi kontrolleri, joka saa parametrinaan saman modelin, ja sieltä sitten päästään käsiksi mementoihin
+
+    // Staten vaihtaminen pitäisi olla aika yksinkertainen homma, toivon mukaan.
+
     // create a GUI with three adjacent ColorBoxes and one CheckBox below them
     private Controller controller;
     private ColorBox colorBox1;
