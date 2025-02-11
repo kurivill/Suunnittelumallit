@@ -60,4 +60,24 @@ public class Controller {
         IMemento currentState = model.createMemento();
         history.add(currentState);
     }
+
+    public ArrayList<IMemento> getHistory() {
+        return (ArrayList<IMemento>) history;
+    }
+
+    public ArrayList<IMemento> getFuture() {
+        return (ArrayList<IMemento>) future;
+    }
+
+    public void restoreState(int index) {
+        if (index >= 0 && index < history.size()) {
+            IMemento memento = history.get(index);
+            model.restoreState(memento);
+            gui.updateGui();
+        } else if (index >= history.size() && index < history.size() + future.size()) {
+            IMemento memento = future.get(index - history.size());
+            model.restoreState(memento);
+            gui.updateGui();
+        }
+    }
 }

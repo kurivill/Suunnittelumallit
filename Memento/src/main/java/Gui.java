@@ -2,13 +2,18 @@
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.scene.input.KeyCode;
+
+import java.util.Stack;
 
 public class Gui extends Application {
 
@@ -20,6 +25,7 @@ public class Gui extends Application {
 
     // create a GUI with three adjacent ColorBoxes and one CheckBox below them
     private Controller controller;
+    private HistoryController hController;
     private ColorBox colorBox1;
     private ColorBox colorBox2;
     private ColorBox colorBox3;
@@ -50,17 +56,51 @@ public class Gui extends Application {
         hBox.setMargin(colorBox3.getRectangle(), insets);
 
 
+        ListView<String> listView = new ListView<>();
+
+
+
         Label label = new Label("Press Ctrl-Z to undo the last change.");
         label.setPadding(insets);
         Label redoLabel = new Label("Press Ctrl-Y to redo the last change.");
         redoLabel.setPadding(insets);
+        Button button = new Button("Open history");
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label, redoLabel);
+        VBox vBox = new VBox(hBox, checkBox, label, redoLabel, button);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());
         });
+
+        button.setOnAction(event -> {
+            hController = new HistoryController(this, controller.getHistory(), controller.getFuture());
+            Stage newStage = new Stage();
+            listView.getItems().clear();
+            newStage.setTitle("History");
+            listView.getItems().add("History:");
+            for (IMemento memento : controller.getHistory()) {
+                listView.getItems().add(memento.toString());
+            }
+            listView.getItems().add("Future:");
+            for (IMemento memento : controller.getFuture()) {
+                listView.getItems().add(memento.toString());
+            }
+            StackPane stackPane = new StackPane();
+            stackPane.getChildren().add(listView);
+            newStage.setScene(new Scene(stackPane, 300, 300));
+            newStage.show();
+        });
+
+        listView.setOnMouseClicked(event -> {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            if (index > 0 && index < controller.getHistory().size() + 1) {
+                controller.restoreState(index - 1);
+            } else if (index > controller.getHistory().size() + 1) {
+                controller.restoreState(index - controller.getHistory().size() - 2);
+            }
+        });
+
 
         // Set the HBox to be the root of the Scene
         Scene scene = new Scene(vBox);

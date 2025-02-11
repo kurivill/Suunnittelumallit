@@ -19,5 +19,8 @@ public class Memento implements IMemento {
         return isSelected;
     }
 
-    // Lisää metodi, joka tulostaa metadatan.
+    @Override
+    public String toString() {
+        return "Memento: options: " + options[0] + " " + options[1] + " " + options[2] + " isSelected: " + isSelected;
+    }
 }
