@@ -5,21 +5,26 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class ChatWindow extends Application {
     private static Mediator mediator = new ChatRoom();
     private ChatClient client;
     private TextArea chatArea;
     private TextField messageField;
     private TextField recipientField;
+    private static String username; // Store username from MultiChatLauncher
 
-    public ChatWindow(String username) {
-        client = new ChatClient(username, mediator);
-        client.setChatWindow(this);
+    public static void setUsername(String name) {
+        username = name;
     }
 
     @Override
     public void start(Stage primaryStage) {
+        if (username == null) {
+            throw new IllegalStateException("Username not set. Use setUsername() before launching.");
+        }
+        client = new ChatClient(username, mediator);
+        client.setChatWindow(this);
+
         primaryStage.setTitle(client.getUsername());
 
         chatArea = new TextArea();
@@ -53,4 +58,3 @@ public class ChatWindow extends Application {
         chatArea.appendText(message + "\n");
     }
 }
-

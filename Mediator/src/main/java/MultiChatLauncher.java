@@ -1,11 +1,16 @@
-import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.application.Platform;
 
-class MultiChatLauncher extends Application {
-    @Override
-    public void start(Stage primaryStage) {
-        new ChatWindow("Alice").start(new Stage());
-        new ChatWindow("Bob").start(new Stage());
-        new ChatWindow("Charlie").start(new Stage());
+public class MultiChatLauncher {
+    public static void main(String[] args) {
+        Platform.startup(() -> {
+            ChatWindow.setUsername("Jukka");
+            new ChatWindow().start(new javafx.stage.Stage());
+
+            ChatWindow.setUsername("Taru");
+            new ChatWindow().start(new javafx.stage.Stage());
+
+            ChatWindow.setUsername("Antti");
+            new ChatWindow().start(new javafx.stage.Stage());
+        });
     }
 }
