@@ -11,7 +11,7 @@ public class ChatWindow extends Application {
     private TextArea chatArea;
     private TextField messageField;
     private TextField recipientField;
-    private static String username; // Store username from MultiChatLauncher
+    private static String username;
 
     public static void setUsername(String name) {
         username = name;
