@@ -35,6 +35,21 @@ public class Recommendation implements Cloneable {
     }
 
 
+    public String getTargetAudience() {
+        return targetAudience;
+    }
 
+    public void setTargetAudience(String targetAudience) {
+        this.targetAudience = targetAudience;
+    }
 
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Recommendation for ").append(targetAudience).append(":\n");
+        books.sort(Comparator.comparing(Book::getTitle));
+        for (Book book : books) {
+            sb.append(book).append("\n");
+        }
+        return sb.toString();
+    }
 }
